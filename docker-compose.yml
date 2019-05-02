@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+
+#  db:
+#    image: postgres
+#
+#  back:
+#    build: back
+#    command: python manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - .:/code
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    networks:
+#      - backend
+
+  front:
+    build: ./docker/front
+    ports:
+      - "80:80"
+    volumes:
+      - ./front:/var/www/html
+    networks:
+      - frontend
+
+networks:
+  frontend:
+#  backend:
