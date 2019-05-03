@@ -1,24 +1,61 @@
-version: "3.4"
+version: '3.4'
 
 services:
 
-#  db:
-#    image: postgres
-#
-#  back:
-#    build: back
-#    command: python manage.py runserver 0.0.0.0:8000
-#    volumes:
-#      - .:/code
-#    ports:
-#      - "8000:8000"
-#    depends_on:
-#      - db
-#    networks:
-#      - backend
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
+    container_name: muproject_elasticsearch_1
+    environment:
+      - node.name=elasticsearch
+      - discovery.seed_hosts=elasticsearch2
+      - cluster.initial_master_nodes=elasticsearch,elasticsearch2
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
+    container_name: muproject_elasticsearch_2
+    environment:
+      - node.name=elasticsearch2
+      - discovery.seed_hosts=elasticsearch
+      - cluster.initial_master_nodes=elasticsearch,elasticsearch2
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata02:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.0.1
+    container_name: muproject_kibana
+    environment:
+      - SERVER_NAME=kibana.local
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - esnet
 
   front:
     build: ./docker/front
+    container_name: muproject_front_1
     ports:
       - "80:80"
     volumes:
@@ -26,6 +63,12 @@ services:
     networks:
       - frontend
 
+volumes:
+  esdata01:
+    driver: local
+  esdata02:
+    driver: local
+
 networks:
   frontend:
-#  backend:
+  esnet:
