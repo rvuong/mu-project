@@ -14,7 +14,6 @@ sysctl -w vm.max_map_count=262144
 
 ```bash
 git clone git@github.com:rvuong/mu-project.git
-cd mu-project
 ```
 
 ## Run
@@ -22,6 +21,7 @@ cd mu-project
 Start the stack
 
 ```bash
+cd mu-project
 docker-compose up --build
 ```
 
