@@ -6,7 +6,7 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch(['http://elasticsearch:9200'])
 app = Flask(__name__)
 
-@app.route('/api', methods=['GET'])
+@app.route('/api/', methods=['GET'])
 def index():
     results = es.indices.get_alias("*")
     return jsonify(results)

@@ -34,4 +34,4 @@ Then you should be able to request both the Elasticsearch and Kibana urls:
 | Elasticsearch Cat. health    | [http://localhost:9200/_cat/health](http://localhost:9200/_cat/health)         |
 | Elasticsearch Cluster health | [http://localhost:9200/_cluster/health](http://localhost:9200/_cluster/health) |
 | Kibana home                  | [http://localhost:5601](http://localhost:5601)                                 |
-| API root                     | [http://localhost:8080/api](http://localhost:8080/api)                         |
+| API root                     | [http://localhost:80/api/](http://localhost:80/api/)                         |

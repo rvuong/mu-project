@@ -56,8 +56,6 @@ services:
   api:
     container_name: muproject_api
     build: ./api
-    ports:
-      - "8080:5000"
     volumes:
       - ./api:/code
     networks:
@@ -74,7 +72,7 @@ services:
     volumes:
       - ./front:/var/www/html
     networks:
-      - frontend
+      - esnet
 
 volumes:
   esdata01:
@@ -84,4 +82,3 @@ volumes:
 
 networks:
   esnet:
-  frontend:
