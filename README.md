@@ -15,7 +15,6 @@ sysctl -w vm.max_map_count=262144
 ```bash
 git clone git@github.com:rvuong/mu-project.git
 cd mu-project
-
 ```
 
 ## Run
@@ -35,3 +34,4 @@ Then you should be able to request both the Elasticsearch and Kibana urls:
 | Elasticsearch Cat. health    | [http://localhost:9200/_cat/health](http://localhost:9200/_cat/health)         |
 | Elasticsearch Cluster health | [http://localhost:9200/_cluster/health](http://localhost:9200/_cluster/health) |
 | Kibana home                  | [http://localhost:5601](http://localhost:5601)                                 |
+| API root                     | [http://localhost:8080/api](http://localhost:8080/api)                         |

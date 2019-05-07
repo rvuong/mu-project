@@ -16,10 +16,10 @@ services:
       memlock:
         soft: -1
         hard: -1
+    ports:
+      - "9200:9200"
     volumes:
       - esdata01:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
     networks:
       - esnet
 
@@ -53,6 +53,19 @@ services:
     networks:
       - esnet
 
+  api:
+    container_name: muproject_api
+    build: ./api
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./api:/code
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+      - elasticsearch2
+
   front:
     build: ./docker/front
     container_name: muproject_front_1
@@ -70,5 +83,5 @@ volumes:
     driver: local
 
 networks:
-  frontend:
   esnet:
+  frontend:
