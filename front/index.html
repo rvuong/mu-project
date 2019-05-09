@@ -84,7 +84,7 @@
                     axios
                         .get('http://localhost/api/menu/proposal')
                         .then(response => {
-                            this.menu = response.data.menu;
+                            this.menu = response.data._source;
                         })
                         .catch(error => {
                             console.error(error);

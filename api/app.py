@@ -2,6 +2,7 @@
 
 from flask import Flask, jsonify, request
 from elasticsearch import Elasticsearch
+from random import randint
 
 es = Elasticsearch(['http://elasticsearch:9200'])
 app = Flask(__name__)
@@ -17,7 +18,11 @@ def index():
 # Get a single random menu
 @app.route('/api/menu/proposal', methods=['GET'])
 def menu_single_proposal():
-    return '{ "menu": { "name": "Gnocchis" } }', 200
+    results = es.search(index="menu")
+    count = len(results['hits']['hits'])
+    index = randint(0, count - 1)
+
+    return jsonify(results['hits']['hits'][index]), 200
 
 # Get a single menu, by id
 @app.route('/api/menu/<int:menu_id>', methods=['GET'])
