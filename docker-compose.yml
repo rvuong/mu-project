@@ -15,8 +15,6 @@ services:
       memlock:
         soft: -1
         hard: -1
-    ports:
-      - "9200:9200"
     volumes:
       - esdata01:/usr/share/elasticsearch/data
     networks:
@@ -36,6 +34,7 @@ services:
       - elasticsearch
 
   api:
+    image: muproject_api
     container_name: muproject_api
     build: ./api
     volumes:
@@ -59,8 +58,6 @@ services:
 
 volumes:
   esdata01:
-    driver: local
-  esdata02:
     driver: local
 
 networks:

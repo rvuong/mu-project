@@ -4,8 +4,9 @@ ADD . /code
 
 WORKDIR /code
 
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip \
+  && pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]

@@ -1,4 +1,4 @@
-# /docker/front/Dockerfile
+# /front/Dockerfile
 FROM nginx:latest
 
 WORKDIR /var/www/html
