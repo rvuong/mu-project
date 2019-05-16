@@ -35,8 +35,17 @@
         </section>
 
         <section v-else>
-            <h1 v-if="loading" class="cover-heading alert alert-info">Loading...</h1>
-            <h1 v-else class="cover-heading alert info">Let's eat <em>{{ menu.name }}</em> today!</h1>
+            <div v-if="loading">
+                <h1 class="cover-heading alert alert-info">Loading...</h1>
+            </div>
+
+            <div v-else>
+                <h1 class="cover-heading alert info">Let's eat <em>{{ menu.name }}</em> today!</h1>
+                <hr />
+
+                <h2>A decent side would be <em>{{ menu.side }}</em></h2>
+                <hr />
+            </div>
         </section>
 
         <p class="lead">
@@ -63,45 +72,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script type="text/javascript">
-    $(document).ready(() => {
-        let data = {
-            menu: {
-                name: null,
-            },
-            loading: true,
-            error: false,
-        };
-
-        let vm = new Vue({
-            el: '#app',
-            data: data,
-            methods: {
-                propose: function () {
-                    this.loading = true;
-                    this.error = false;
-
-                    axios
-                        .get('http://localhost/api/menu/proposal')
-                        .then(response => {
-                            this.menu = response.data._source;
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            this.loading = false;
-                            this.error = true;
-                        })
-                        .finally(() => {
-                            this.loading = false;
-                            this.error = false;
-                        });
-                }
-            },
-            mounted: function () {
-                this.propose();
-            },
-        })
-    });
-</script>
+<script type="text/javascript" src="script/vue-engine.js"></script>
 </body>
 </html>
