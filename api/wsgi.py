@@ -1,3 +1,5 @@
+# api/wsgi.py
+
 from app import app
 from flask import Session
 
@@ -6,4 +8,3 @@ if __name__ == "__main__":
     Session.init_app(app)
     app.debug = True
     app.run()
-
