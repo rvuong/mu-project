@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,10 +40,9 @@
             </div>
 
             <div v-else>
-                <h1 class="cover-heading alert info">Let's eat <em>{{ menu.name }}</em> today!</h1>
                 <hr />
 
-                <h2>A decent side would be <em>{{ menu.side }}</em></h2>
+                <h1 class="cover-heading alert info">{{ menu.name }}</h1>
                 <hr />
             </div>
         </section>
