@@ -31,12 +31,12 @@
 
     <main role="main" class="inner cover" id="app">
         <section v-if="error">
-            <h1 class="cover-heading alert alert-danger">Could not propose a menu</h1>
+            <h1 class="cover-heading alert alert-danger">Erreur</h1>
         </section>
 
         <section v-else>
             <div v-if="loading">
-                <h1 class="cover-heading alert alert-info">Loading...</h1>
+                <h1 class="cover-heading alert alert-info">Chargement...</h1>
             </div>
 
             <div v-else>
@@ -48,7 +48,7 @@
         </section>
 
         <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary" v-on:click="propose">Propose again</a>
+            <a href="#" class="btn btn-lg btn-secondary" v-on:click="propose">Changer</a>
         </p>
     </main>
 
