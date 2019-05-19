@@ -16,18 +16,17 @@ $(document).ready(() => {
                 this.error = false;
 
                 axios
-                    .get('http://localhost/api/menu/proposal')
+                    .get('/api/menu/proposal')
                     .then(response => {
                         this.menu = response.data._source;
+                        this.error = false;
                     })
                     .catch(error => {
                         console.error(error);
-                        this.loading = false;
                         this.error = true;
                     })
                     .finally(() => {
                         this.loading = false;
-                        this.error = false;
                     });
             }
         },
