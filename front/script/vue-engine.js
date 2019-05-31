@@ -1,37 +1,56 @@
 $(document).ready(() => {
+    let menuIndex = null;
+    let menus = [];
+
     let data = {
         menu: {
             name: null,
         },
-        loading: true,
+        loading: false,
         error: false,
     };
 
+    // Creates the VueJS instance
     let vm = new Vue({
         el: '#app',
         data: data,
         methods: {
-            propose: function () {
+            load: function () {
                 this.loading = true;
                 this.error = false;
 
+                // Fetches menus proposals
                 axios
-                    .get('/api/menu/proposal')
+                    .get('/api/menus')
                     .then(response => {
-                        this.menu = response.data._source;
-                        this.error = false;
+                        if (200 !== response.status) {
+                            this.loading = false;
+                            this.error = true;
+                            console.error(response.statusText);
+                        } else {
+                            this.loading = false;
+                            this.error = false;
+                            menus = response.data.hits.hits.slice();
+                        }
                     })
                     .catch(error => {
-                        console.error(error);
                         this.error = true;
+                        console.error(error);
                     })
                     .finally(() => {
-                        this.loading = false;
-                    });
+                        this.propose();
+                    })
+                ;
+            },
+            getRandomIndex: (max) => Math.floor(Math.random() * Math.floor(max)),
+            propose: function () {
+                let menuIndex = this.getRandomIndex(menus.length);
+
+                this.menu = menus[menuIndex]._source;
             }
         },
         mounted: function () {
-            this.propose();
+            this.load();
         },
     })
 });

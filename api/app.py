@@ -8,13 +8,14 @@ es = Elasticsearch(['http://elasticsearch:9200'])
 app = Flask(__name__)
 
 # Get a single random menu
-@app.route('/api/menu/proposal', methods=['GET'])
-def menu_single_proposal():
-    results = es.search(index="menu")
-    count = len(results['hits']['hits'])
-    index = randint(0, count - 1)
+@app.route('/api/menus', methods=['GET'])
+def menus_list():
+    try:
+        results = es.search(index="menu", body={ "size": 1000 })
 
-    return jsonify(results['hits']['hits'][index]), 200
+        return jsonify(results), 200
+    except Exception as exception:
+        return '{ "error": "Not Found" }', 404
 
 # Get a single menu, by id
 @app.route('/api/menu/<string:menu_id>', methods=['GET'])
