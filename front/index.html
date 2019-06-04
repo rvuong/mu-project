@@ -17,19 +17,14 @@
 </head>
 
 <body class="text-center">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="app">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">mu-project</h3>
-<!--            <nav class="nav nav-masthead justify-content-center">-->
-<!--                <a class="nav-link active" href="#">Home</a>-->
-<!--                <a class="nav-link" href="#">Features</a>-->
-<!--                <a class="nav-link" href="#">Contact</a>-->
-<!--            </nav>-->
+            <h3 class="masthead-brand">Hello, {{ user }}!</h3>
         </div>
     </header>
 
-    <main role="main" class="inner cover" id="app">
+    <main role="main" class="inner cover">
         <section v-if="error">
             <h1 class="cover-heading alert alert-danger">Erreur</h1>
         </section>

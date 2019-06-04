@@ -6,15 +6,34 @@ $(document).ready(() => {
         menu: {
             name: null,
         },
+        user: null,
         loading: false,
         error: false,
     };
+
 
     // Creates the VueJS instance
     let vm = new Vue({
         el: '#app',
         data: data,
         methods: {
+            authenticate: function () {
+                // Fetches menus proposals
+                axios
+                    .get('/api/user')
+                    .then(response => {
+                        if (200 !== response.status) {
+                            console.error(response.statusText);
+                        } else {
+                            this.user = response.data._source.name;
+                        }
+                    })
+                    .catch(error => {
+                        this.error = true;
+                        console.error(error);
+                    })
+                ;
+            },
             load: function () {
                 this.loading = true;
                 this.error = false;
@@ -50,6 +69,7 @@ $(document).ready(() => {
             }
         },
         mounted: function () {
+            this.authenticate();
             this.load();
         },
     })
