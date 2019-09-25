@@ -35,3 +35,23 @@ Then you should be able to request both the Elasticsearch and Kibana urls:
 | Elasticsearch Cluster health | [http://localhost:9200/_cluster/health](http://localhost:9200/_cluster/health) |
 | Kibana home                  | [http://localhost:5601](http://localhost:5601)                                 |
 | API root                     | [http://localhost:80/api/](http://localhost:80/api/)                         |
+
+## Initialize the data
+
+Load the initial user:
+
+```bash
+curl -X PUT \
+  http://localhost:9200/user/_doc/a9bd0bd8-839b-11e9-8fc4-0242c0a82004 \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "Myriam"
+}'
+```
+
+Given the data file, load the menus:
+
+```bash
+curl -H "Content-Type: application/json" -XPOST "localhost:9200/menu/_bulk?pretty&refresh" --data-binary "@menus.json"
+```
